@@ -15,10 +15,10 @@ function indiceUsuario(filtro){
 module.exports = {
     novoUsuario(_, 
         // {nome, email, idade}
-        args
+        {dados}
         ){
 
-        const emailExistentes = usuarios.some(u => u.email === args.email)
+        const emailExistentes = usuarios.some(u => u.email === dados.email)
 
         if(emailExistentes){
             throw new Error('E-mail já cadastrado')
@@ -26,7 +26,7 @@ module.exports = {
 
         const novo = {
             id: proximoId(),
-            ...args,
+            ...dados,
             perfil_id: 1,
             status: 'ATIVO'
         }
@@ -37,8 +37,8 @@ module.exports = {
         
        
     },
-    excluirUsuario(_, { id }){
-        const i = usuarios.findIndex(u => u.id === id)
+    excluirUsuario(_, { filtro }){
+        const i = indiceUsuario(filtro)
         if(i < 0){
             throw new Error('Usuario não encontrado')
         }
@@ -46,21 +46,21 @@ module.exports = {
         return excluidos ? excluidos[0] : null
     },
 
-    alterarUsuario(_, args){
-        const i = usuarios.findIndex(u => u.id === args.id)
+    alterarUsuario(_, {filtro, dados}){
+        const i = indiceUsuario(filtro)
 
         if(i < 0){
             throw new Error('Usuario não encontrado')
         }
 
-        const usuario = {
-            ...usuarios[i],
-            ...args
+        usuarios[i].nome = dados.nome
+        usuarios[i].email = dados.email
+        
+        if(dados.idade){
+            usuarios[i].idade = dados.idade
         }
-
-        usuarios.splice(i,1,usuario)
-
-        return usuario
+        
+        return usuarios[i]
         
     }
 }
