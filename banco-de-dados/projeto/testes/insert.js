@@ -16,9 +16,14 @@ const perfilSU = {
 }
 
 //Quando trabalha com promisse podemos encadear varios thens, tal que o proximo then recebe como parametro o vaor do anterior
-db.insert(perfilSU).into('perfis')
-    .then(res => res[0])
-    .then(id => `O codigo gerado foi ${id}`)
-    .then(string => console.log(string))    
+// db.insert(perfilSU).into('perfis')
+//     .then(res => res[0])
+//     .then(id => `O codigo gerado foi ${id}`)
+//     .then(string => console.log(string))    
+//     .catch(err => console.log(err.sqlMessage))
+//     .finally(() => db.destroy()) 
+
+    db('perfis').insert(perfilSU)
+    .then(res => console.log(res))
     .catch(err => console.log(err.sqlMessage))
-    .finally(() => db.destroy()) 
+    .finally(() => db.destroy()) //

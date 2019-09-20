@@ -34,4 +34,4 @@ async function exercicio() {
 
 exercicio()
     .then(usuario => console.log(usuario))
-   
+    .finally(() => db.destroy())

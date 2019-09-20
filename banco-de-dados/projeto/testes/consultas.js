@@ -28,11 +28,21 @@ const db = require('../config/db')
 //     .finally(() => db.destroy())
 
 // Traz um elemento como resposta ond eu posso especificar um campo expecifico
+// db('perfis')
+//     .where({id: 2})
+//     .first()
+//     .then(res => console.log(res))
+//     .finally(() => db.destroy())
+
+a = 'admin'
+
 db('perfis')
-    .where({id: 2})
+    .where('nome', 'like', a)
     .first()
-    .then(res => console.log(res.nome))
+    .then(res => console.log(res))
     .finally(() => db.destroy())
+
+
 
 
 //Exemplos de Wheres suportados
