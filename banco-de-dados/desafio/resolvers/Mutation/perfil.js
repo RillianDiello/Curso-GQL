@@ -27,7 +27,7 @@ module.exports = {
                 const { id } = perfil
                 
                 //deleta todos os registro de relacionamento
-                await db('usuario_perfil')
+                await db('usuarios_perfis')
                     .where({ perfil_id: id }).delete()               
                 
                 await db('perfis')
@@ -45,7 +45,7 @@ module.exports = {
             
             const perfil = await obterPerfil(_,{ filtro })           
                    
-            console.log(perfil)
+            
             if(perfil){
                 const { id } = perfil
                                 
