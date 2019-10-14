@@ -4,13 +4,13 @@ const db = require('../../config/db')
 //Aqui foi utilizado um join, para unir duas tabelas
 // http://knexjs.org/#Builder-join
 module.exports = {
-    perfis(usuario) {
-        return db('perfis')
+    usuarios(perfil) {
+        return db('usuarios')
             .join(
                 'usuarios_perfis',
-                'perfis.id',
-                'usuarios_perfis.perfil_id'
+                'usuarios.id',
+                'usuarios_perfis.usuario_id'
             )
-            .where({usuario_id: usuario.id})        
+            .where({perfil_id: perfil.id})        
     }
 }
